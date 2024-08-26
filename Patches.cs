@@ -24,7 +24,7 @@ internal static class TowerSelectionMenu_UpdateParagon
         var degree = __instance.paragonDegree.transform.parent.gameObject;
 
         if (!degree.GetComponent<Button>() &&
-            (!ParagonomicsMod.AllowDegreeSettingOutsideSandbox || __instance.Bridge.IsSandboxMode()))
+            (ParagonomicsMod.AllowDegreeSettingOutsideSandbox || __instance.Bridge.IsSandboxMode()))
         {
             var button = degree.AddComponent<Button>();
             button.transition = Selectable.Transition.Animation;

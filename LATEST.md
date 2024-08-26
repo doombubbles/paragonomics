@@ -1,1 +1,2 @@
-- Initial Release
+- Fixed the sandbox setting being inverted
+- Fixed possible divide by 0 crashes if combined with price changer mods

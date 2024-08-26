@@ -184,7 +184,7 @@ public class ParagonomicsMod : BloonsTD6Mod
         var degreeDataModel = gameModel.paragonDegreeDataModel;
         var paragonCost = gameModel.GetParagonUpgradeForTowerId(paragon.tower.towerModel.baseId).cost;
         var powerFromMoneySpent = (float) investment * degreeDataModel.moneySpentOverX /
-                                  ((1 + degreeDataModel.paidContributionPenalty) * paragonCost);
+                                  ((1 + degreeDataModel.paidContributionPenalty) * Math.Max(paragonCost, 1));
         
         paragon.investmentInfo = paragon.investmentInfo with
         {

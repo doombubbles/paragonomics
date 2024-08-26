@@ -94,14 +94,14 @@ public static class Calculations
         var baseId = paragon.tower.towerModel.baseId;
         var gameModel = paragon.Sim.model;
 
-        var totalTowersCost = gameModel.GetTower(baseId).cost * 3;
+        var totalTowersCost = Math.Max(gameModel.GetTower(baseId).cost, 1) * 3;
         var totalUpgradesCost = gameModel.GetTowersWithBaseId(baseId)
             .Where(tower => !tower.isParagon)
             .SelectMany(tower => tower.appliedUpgrades)
             .Distinct()
             .Select(gameModel.GetUpgrade)
-            .Sum(upgrade => upgrade.cost);
-        var paragonUpgradesCost = gameModel.GetParagonUpgradeForTowerId(baseId).cost;
+            .Sum(upgrade => Math.Max(upgrade.cost, 1));
+        var paragonUpgradesCost = Math.Max(gameModel.GetParagonUpgradeForTowerId(baseId).cost, 10);
 
         return (totalTowersCost + totalUpgradesCost) / (totalTowersCost + totalUpgradesCost + paragonUpgradesCost);
     }
@@ -149,7 +149,6 @@ public static class Calculations
             var factor = GetCostFactor(paragon);
             percentPierceUp = -(100 + 10000 / (-100 + percentPierceUp / SMath.Pow(factor, 2)));
             percentDamageUp = -(100 + 10000 / (-100 + percentDamageUp / SMath.Pow(factor, 2)));
-            ModHelper.Msg<ParagonomicsMod>(1 / factor);
         }
 
         return new ParagonTowerModel.PowerDegreeMutator(degree,
