@@ -222,7 +222,7 @@ public class ParagonomicsMod : BloonsTD6Mod
 
         OnDegreeChanged(paragon);
 
-        InGame.Bridge.SetCash(InGame.Bridge.GetCash() - investment);
+        InGame.Bridge.SetCash(InGame.Bridge.GetCash() - investment, InGame.Bridge.GetInputId());
     }
 
 
